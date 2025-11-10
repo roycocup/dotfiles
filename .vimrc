@@ -1,45 +1,45 @@
 set number
-syntax on
+set paste
+set noerrorbells
+set novisualbell
+set t_vb=
+set tabstop=4       " A tab character looks like 2 spaces
+set shiftwidth=4    " Indent levels use 2 spaces
+" set expandtab       " Convert tabs to spaces
+set softtabstop=4   " Pressing Tab feels like 2 spaces
 
-let mapleader = ','
+let mapleader = ","
 
-nnoremap <C-p> CtrlP 
-nnoremap <C-n> :NERDTreeToggle<CR>
-colorscheme desert
+set path+=**
+set wildmenu
+
+nnoremap <leader>q :Explore<CR>
+nnoremap <leader>. :tabnew<CR>
 
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" FZF SEARCH
+" sudo apt install fzf ripgrep 
+" git clone --depth 1 https://github.com/junegunn/fzf.git 
+" git clone --depth 1 https://github.com/junegunn/fzf.vim
+" --- fzf defaults: show hidden files, ignore .git ---
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git"'
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Files (fuzzy file finder in current dir/project)
+nnoremap <leader>f :GFiles<CR>
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Git files (only tracked/ignored-by-git-smart)
+" nnoremap <leader>p :GFiles<CR>
 
-" custom
-Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'slashmili/alchemist.vim'
-Plugin 'elixir-editors/vim-elixir'
+" Text search (live grep with ripgrep)
+nnoremap <leader>s :Rg<CR>
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Buffers and recent files (handy)
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
+
+" Optional: nicer preview window
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+" TODO CHECKBOXES
