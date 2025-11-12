@@ -1,0 +1,57 @@
+set number
+set paste
+set noerrorbells
+set novisualbell
+set t_vb=
+set tabstop=4       " A tab character looks like 2 spaces
+set shiftwidth=4    " Indent levels use 2 spaces
+" set expandtab       " Convert tabs to spaces
+set softtabstop=4   " Pressing Tab feels like 2 spaces
+
+let mapleader = ","
+
+set path+=**
+set wildmenu
+
+nnoremap <leader>q :Explore<CR>
+nnoremap <leader>. :tabnew<CR>
+
+
+" FZF SEARCH
+" --- fzf defaults: show hidden files, ignore .git ---
+" let $FZF_DEFAULT_OPTS = '--exact --layout=reverse --info=inline'
+let $FZF_DEFAULT_OPTS = '--exact --info=inline'
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git"'
+endif
+
+" Your fast file source
+"let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob \"!.git\"'
+" let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git"'
+
+" Better ranking for sequential / boundary / camelCase hits
+" - algo=v2    : fzy-like scoring (prefers consecutive and boundary matches)
+" - tiebreak   : earlier match position first, then shorter match
+" - case=smart : case-insensitive unless query has uppercase
+" - bind       : Ctrl-e toggles exact mode on the fly when you need it
+" let $FZF_DEFAULT_OPTS='--algo=v2 --tiebreak=begin,length --case=smart --layout=reverse --info=inline --bind=ctrl-e:toggle-exact'
+
+
+" Files (fuzzy file finder in current dir/project)
+nnoremap <leader>f :GFiles<CR>
+
+" Git files (only tracked/ignored-by-git-smart)
+" nnoremap <leader>p :GFiles<CR>
+
+" Text search (live grep with ripgrep)
+nnoremap <leader>s :Rg<CR>
+
+" Buffers and recent files (handy)
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
+
+" Optional: nicer preview window
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+" TODO CHECKBOXES
+
